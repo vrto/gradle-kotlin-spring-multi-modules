@@ -1,0 +1,14 @@
+.history
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/.settings
+!/bin/start
+!/bin/stop
+/bin
+.gradle
+/build/
+gradle-app.setting
