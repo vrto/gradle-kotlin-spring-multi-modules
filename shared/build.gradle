@@ -1,0 +1,10 @@
+// stuff from src/test is published into a special JAR on which test code in other modules can depend on
+
+task testJar(type: Jar) {
+    classifier = 'test'
+    from sourceSets.test.output
+}
+
+artifacts {
+    testRuntime testJar
+}

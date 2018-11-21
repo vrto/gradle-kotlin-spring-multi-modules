@@ -1,0 +1,5 @@
+dependencies {
+    // whatever libraries are needed within this module that aren't present in 
+    // "subprojects" section in the main gradle build file
+    compile 'com.google.guava:guava:23.0'
+}

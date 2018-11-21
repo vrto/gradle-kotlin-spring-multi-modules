@@ -1,2 +1,9 @@
 rootProject.name = 'multi-modules'
 
+include 'shared'
+include 'customers'
+include 'users'
+
+project(":shared").projectDir = "shared" as File
+project(":customers").projectDir = "customers" as File
+project(":users").projectDir = "users" as File

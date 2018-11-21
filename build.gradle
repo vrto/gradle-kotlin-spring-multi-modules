@@ -27,9 +27,15 @@ repositories {
 }
 
 dependencies {
+    compile project(':shared')
+    compile project(':customers')
+    compile project(':users')
+
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile 'org.jetbrains.kotlin:kotlin-reflect'
     compile 'org.springframework.boot:spring-boot-starter-web'
+
+    testCompile project(path: ':shared', configuration: 'testRuntime')
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -41,4 +47,51 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'org.jetbrains.kotlin.plugin.allopen'
+    apply plugin: 'org.jetbrains.kotlin.plugin.spring'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        jcenter()
+        maven {
+            url "http://repo.spring.io/libs-snapshot"
+        }
+    }
+
+    sourceCompatibility = 1.8
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        compile 'org.jetbrains.kotlin:kotlin-reflect'
+        compile 'org.springframework.boot:spring-boot-starter-web'
+
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+        testCompile 'io.rest-assured:rest-assured:3.2.0'
+    }
+
+    dependencyManagement {
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:2.0.4.RELEASE") }
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+}
+
+// shared can't depend on self, but all the other projects need it
+configure(subprojects.findAll { it.name != 'shared' }) {
+    dependencies {
+        compile project(':shared')
+        testCompile project(path: ':shared', configuration: 'testRuntime')
+    }
 }
