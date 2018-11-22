@@ -42,6 +42,10 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+jar {
+    baseName 'multi-modules'
+}
+
 subprojects {
 
     apply plugin: 'java'
