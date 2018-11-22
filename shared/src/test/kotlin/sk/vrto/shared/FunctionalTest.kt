@@ -19,7 +19,7 @@ open class FunctionalTest {
 
     @Rule
     @JvmField
-    final val springMethodRule = SpringMethodRule()
+    val springMethodRule = SpringMethodRule()
 
     @Before
     fun setUp() {
