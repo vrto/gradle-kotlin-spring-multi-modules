@@ -1,15 +1,16 @@
 package sk.vrto.customer
 
+import org.springframework.http.ResponseEntity.notFound
+import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class CustomerController {
+class CustomerController(val customerRepository: CustomerRepository) {
 
     @GetMapping("/customer/{id}")
-    fun getCustomer(@PathVariable("id") id: Long) = Customer(id, "Test Customer")
-
+    fun getCustomer(@PathVariable("id") id: Long) = customerRepository.findById(id)
+        .map { ok(it) }
+        .orElseGet { notFound().build() }
 }
-
-data class Customer(val id: Long, val name: String)

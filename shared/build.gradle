@@ -8,3 +8,8 @@ task testJar(type: Jar) {
 artifacts {
     testRuntime testJar
 }
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile 'com.h2database:h2:1.4.196'
+}

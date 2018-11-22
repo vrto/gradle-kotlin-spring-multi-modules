@@ -33,7 +33,7 @@ class WholeAppTest : FunctionalTest() {
         get("/customer/5").then()
             .statusCode(200)
             .body("id", equalTo(5))
-            .body("name", equalTo("Test Customer"))
+            .body("name", equalTo("Dude"))
     }
 
     @Test

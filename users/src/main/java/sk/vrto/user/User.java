@@ -1,12 +1,20 @@
 package sk.vrto.user;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
 public class User {
 
-    public User(long id, String username) {
-        this.id = id;
-        this.username = username;
-    }
+    @Id
+    private Long id;
 
-    public long id;
-    public String username;
+    private String username;
 }

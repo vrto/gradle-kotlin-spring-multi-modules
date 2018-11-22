@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.get;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 @SpringBootTest(
-        classes = {Application.class},
+        classes = {UsersModuleApp.class},
         properties = {"server.port=9999"},
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
 )
@@ -20,5 +20,10 @@ public class UserControllerTest extends FunctionalTest {
                 .statusCode(200)
                 .body("id", equalTo(6))
                 .body("username", equalTo("Test username"));
+    }
+
+    @Test
+    public void shouldReturnNotFound() {
+        get("/user/-1").then().statusCode(404);
     }
 }
