@@ -17,9 +17,12 @@ apply plugin: 'org.jetbrains.kotlin.plugin.spring'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+group 'sk.vrto'
+version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url "http://repo.spring.io/libs-snapshot" }
 }
