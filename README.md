@@ -6,9 +6,9 @@ Build a multi-module server app that consists of several slices that can be deve
 
 `./gradlew clean build` builds the whole thing
  
-`./gradlew :users:clean build` builds a single module where `:users` is the module name
+`./gradlew users:clean build` builds a single module where `users` is the module name
 
-`./gradlew :users:test` runs tests within a single module where `:users` is the module name
+`./gradlew users:test` runs tests within a single module where `users` is the module name
 
 `./gradlew test` runs all tests across all modules
 

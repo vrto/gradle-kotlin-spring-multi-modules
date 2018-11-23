@@ -1,21 +1,27 @@
-plugins {
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.10'
-    id 'org.jetbrains.kotlin.plugin.allopen' version '1.3.10'
-    id 'org.jetbrains.kotlin.plugin.spring' version '1.3.10'
-    id 'org.springframework.boot' version '2.0.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:${springDependencyManagementVersion}"
+    }
 }
 
-group 'sk.vrto'
-version '1.0-SNAPSHOT'
+// old syntax for plugins needed so their versions can be referenced from 'gradle.properties`
+apply plugin: 'java'
+apply plugin: 'org.jetbrains.kotlin.jvm'
+apply plugin: 'org.jetbrains.kotlin.plugin.spring'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 sourceCompatibility = 1.8
 
 repositories {
-    maven {
-        url "http://repo.spring.io/libs-snapshot"
-    }
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-snapshot" }
 }
 
 dependencies {
@@ -66,13 +72,13 @@ subprojects {
         compile 'org.springframework.boot:spring-boot-starter-web'
 
         testCompile 'org.springframework.boot:spring-boot-starter-test'
-        testCompile 'junit:junit:4.12'
-        testCompile 'io.rest-assured:rest-assured:3.2.0'
+        testCompile "junit:junit:${junitVersion}"
+        testCompile "io.rest-assured:rest-assured:${restAssuredVersion}"
     }
 
     // spring boot plugin may only be applied to the root project
     dependencyManagement {
-        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:2.0.4.RELEASE") }
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
     }
 }
 
